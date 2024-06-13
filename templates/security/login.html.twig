@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sonia boutique - Connexion{% endblock %}
+
+{% block body %}
+
+<div class= "container mt-5" > 
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal mt-3">Merci de vous connecter</h1>
+    <label for="inputEmail">Votre Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" 
+    autocomplete="email" placeholder="Votre adresse email" required autofocus>
+
+    <label for="inputPassword">Votre mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" 
+    autocomplete="current-password" placeholder="Votre mot de passe" required>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <input type="hidden" name="target_path" value="{{ path('app_account') }}">
+
+    <hr style="border: none;">
+    <button class="btn btn-lg btn-primary btn-sm " type="submit">Se connecter</button>
+</form>
+<br>
+Vous n'avez pas de compte ? <a href="{{ path('app_register') }}"> inscrivez-vous</a>   
+
+<hr style="border: none;">
+</div>
+{% endblock %}
+
+
+
