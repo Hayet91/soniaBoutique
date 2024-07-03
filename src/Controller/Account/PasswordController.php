@@ -1,29 +1,30 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Account;
 
 use App\Form\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Response;
 
-class AccountController extends AbstractController
+
+class PasswordController extends AbstractController
+
 {
-    /**
-     * @Route("/compte", name="app_account")
-     */
-    public function index(): Response
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        return $this->render('account/index.html.twig');
+        $this->entityManager = $entityManager;
     }
 
-     /**
+ /**
      * @Route("/compte/modifier-mot-de-passe", name="app_account_modify_pwd")
      */
-    public function password(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $notification = null;
 
@@ -43,16 +44,21 @@ class AccountController extends AbstractController
 
                 $user->setPassword($password);
 
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
                 $notification = "Votre mot de passe a bien été mis à jour.";
                     }else {
                         $notification = "Votre mot de passe actuel n'est pas le bon";
                     }
                  }
-                return $this->render('account/password.html.twig', [
+                return $this->render('account/password/index.html.twig', [
                 'form' => $form->createView(),
                 'notification' => $notification
                 ]);
             }
-        }
+
+}
+?>
+
+
+    
