@@ -58,6 +58,11 @@ class Address
      */
     private $user;
 
+    public function __toString(): string
+    {
+        return $this->getFirstname().' '.$this->getLastname().'<br/>'.$this->getAddress().'<br/>'.$this->getCity().' - '.$this->getCountry();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
