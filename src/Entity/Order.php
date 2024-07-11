@@ -63,6 +63,11 @@ class Order
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $stripe_session_id;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -79,6 +84,8 @@ class Order
         }
         return $totalTTC + $this->getCarrierPrice();
     }
+
+
 
     public function getTotalTva()
     {
@@ -198,6 +205,18 @@ class Order
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStripeSessionId(): ?string
+    {
+        return $this->stripe_session_id;
+    }
+
+    public function setStripeSessionId(?string $stripe_session_id): self
+    {
+        $this->stripe_session_id = $stripe_session_id;
 
         return $this;
     }

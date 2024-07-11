@@ -7,7 +7,6 @@ use App\Entity\Order;
 use App\Entity\OrderDetail;
 use App\Form\OrderType;
 use DateTime;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,6 +89,7 @@ class OrderController extends AbstractController
             $order->setCarrierPrice($form->get('carriers')->getData()->getPrice());
             $order->setDelivery($address);
 
+            if (!empty($products))
             foreach ($products as $product) {
                 $orderDetail = new OrderDetail();
                 $orderDetail->setProductName($product['object']->getName());
@@ -106,9 +106,18 @@ class OrderController extends AbstractController
         return $this->render('order/summary.html.twig', [
             'choices' => $form->getData(),
             'cart' => $products,
+            'order' => $order,
             'totalWt' => $cart->getTotalWt()
         ]);
     }
 }
 
-    
+
+
+
+
+
+
+
+
+

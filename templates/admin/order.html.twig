@@ -5,7 +5,8 @@
     {{ include ('admin/state.html.twig', { field : { 'value' : order.state} } ) }}
     <br/>
     <br/>
-<span>Passée le : {{ order.createdAt|date('d/m/y') }}</span>
+<span>Passée le : {{ order.createdAt|date('d/m/y') }}</span></br>
+<span>Stripe session Id : {{ order.stripeSessionId }}</span>
 
     <div class="row my-4">
 
