@@ -30,6 +30,7 @@ class OrderController extends AbstractController
 }
 
 
+// public function send($to_email, $to_name, $subject, $template, $vars = null)
 
 
 
