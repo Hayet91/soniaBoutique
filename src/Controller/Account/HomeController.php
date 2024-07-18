@@ -9,25 +9,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
     /**
      * @Route("/compte", name="app_account")
      */
-        public function index(OrderRepository $orderRepository): Response
-        {
-            $orders = $orderRepository->findBy([
-                'user' => $this->getUser(),
-                'state' => [2,3]
-            ]);
-    
-            return $this->render('account/index.html.twig', [
-                'orders' => $orders
-            ]);
-        }
+
+    public function index(OrderRepository $orderRepository): Response
+    {
+        $orders = $orderRepository->findBy([
+            'user' => $this->getUser(),
+            'state' => [2,3]
+        ]);
+
+        return $this->render('account/index.html.twig', [
+            'orders' => $orders
+        ]);
     }
-    
+}
 
 
-
+  
        
 
    

@@ -52,6 +52,11 @@ class Product
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isHomepage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +149,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function isIsHomepage(): ?bool
+    {
+        return $this->isHomepage;
+    }
+
+    public function setIsHomepage(bool $isHomepage): self
+    {
+        $this->isHomepage = $isHomepage;
 
         return $this;
     }

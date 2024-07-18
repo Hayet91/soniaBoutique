@@ -66,13 +66,3 @@ class RegisterController extends AbstractController
         ]);
     }
 }
-
-
-
- // Envoie d'un email de confirmation d'inscription
- $mail = new Mail();
- $vars = [
-     'firstname' => $user->getFirstname(),
- ];
- $mail->send($user->getEmail(), $user->getFirstname().' '.$user->getLastname(), "Bienvenue sur La Boutique Française", "welcome.html", $vars);
-
