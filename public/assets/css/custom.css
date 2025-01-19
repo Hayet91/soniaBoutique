@@ -98,3 +98,18 @@
     margin: 0 auto;
 }
 
+/*home/index.html.twig*/
+
+@media (max-width: 768px) {
+    .carousel-item {
+        object-fit: contain; /* Évite de couper l'image */
+        height: auto;
+    }
+    .carousel-inner {
+        padding: 10px; /* Ajoute un peu de marge autour du carrousel si nécessaire */
+    }
+}
+
+.custom-button-spacing {
+    margin-top: 40px !important;  /* Ajustez la valeur selon vos besoins */
+}
